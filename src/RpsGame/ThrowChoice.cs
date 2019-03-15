@@ -7,38 +7,38 @@ namespace RpsGame
     public static readonly ThrowChoice Rock;
     public static readonly ThrowChoice Paper;
     public static readonly ThrowChoice Scissors;
+    public static readonly ThrowChoice Lizard;
+    public static readonly ThrowChoice Spock;
+
 
     private readonly ThrowChoice[] _winsAgainst;
-    private readonly ThrowChoice[] _losesAgainst;
 
     static ThrowChoice()
     {
-      ThrowChoice[] rockWins = new ThrowChoice[1];
-      ThrowChoice[] rockLoses = new ThrowChoice[1];
-      ThrowChoice.Rock = new ThrowChoice("rock", rockWins, rockLoses);
+      ThrowChoice[] rockWins = new ThrowChoice[2];
+      ThrowChoice.Rock = new ThrowChoice("rock", rockWins);
 
-      ThrowChoice[] paperWins = new ThrowChoice[1];
-      ThrowChoice[] paperLoses = new ThrowChoice[1];
-      ThrowChoice.Paper = new ThrowChoice("paper", paperWins, paperLoses);
+      ThrowChoice[] paperWins = new ThrowChoice[2];
+      ThrowChoice.Paper = new ThrowChoice("paper", paperWins);
 
-      ThrowChoice[] scissorsWins = new ThrowChoice[1];
-      ThrowChoice[] scissorsLoses = new ThrowChoice[1];
-      ThrowChoice.Scissors = new ThrowChoice("scissors", scissorsWins, scissorsLoses);
+      ThrowChoice[] scissorsWins = new ThrowChoice[2];
+      ThrowChoice.Scissors = new ThrowChoice("scissors", scissorsWins);
+
+      ThrowChoice[] lizardWins = new ThrowChoice[2];
+      ThrowChoice.Lizard = new ThrowChoice("lizard", lizardWins);
+
+      ThrowChoice[] spockWins = new ThrowChoice[2];
+      ThrowChoice.Spock = new ThrowChoice("Spock", spockWins);
 
       rockWins[0] = Scissors;
       paperWins[0] = Rock;
       scissorsWins[0] = Paper;
-
-      rockLoses[0] = Paper;
-      paperLoses[0] = Scissors;
-      scissorsLoses[0] = Rock;
     }
 
-    private ThrowChoice(string name, ThrowChoice[] winsAgainst, ThrowChoice[] losesAgainst)
+    private ThrowChoice(string name, ThrowChoice[] winsAgainst)
     {
       this.Name = name;
       _winsAgainst = winsAgainst;
-      _losesAgainst = losesAgainst;
     }
 
     public string Name { get; }
