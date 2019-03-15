@@ -6,30 +6,20 @@ namespace RpsGame
   {
     static void Main(string[] args)
     {
-      Console.WriteLine("Rock Paper Scissors");
+      Console.WriteLine("Rock Paper Scissors Lizard Spock");
       Console.WriteLine("-------------------");
-      Console.Write("Pick (r)ock, (p)aper, or (s)cissors: ");
 
-      UserChoiceParser parser = new UserChoiceParser();
-
-      ThrowChoice input;
-      try
-      {
-        input = parser.ParseChoice(Console.ReadKey().KeyChar);
-      }
-      catch (ArgumentOutOfRangeException aex)
-      {
-        Console.WriteLine("You all failed.");
-        return;
-      }
+      IChoiceMaker player1 = new ConsoleChoiceMaker();
+      ThrowChoice player1Choice = player1.MakeChoice();
 
       Console.WriteLine("");
 
-      ThrowChoice computerChoice = (ThrowChoice)new Random().Next(1, 4); // 1 = rock, 2 = paper, 3 = scissors
+      IChoiceMaker player2 = new RandomChoiceMaker();
+      ThrowChoice player2Choice = player2.MakeChoice();
 
-      Outcome outcome = new GameEngine().GenerateOutcome(input, computerChoice);
+      Outcome outcome = new GameEngine().GenerateOutcome(player1Choice, player2Choice);
 
-      Console.WriteLine(ThrowProcessor(input, computerChoice, outcome));
+      Console.WriteLine(ThrowProcessor(player1Choice, player2Choice, outcome));
     }
 
     public static string ThrowProcessor(ThrowChoice userChoice, ThrowChoice computerChoice, Outcome outcome)

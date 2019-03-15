@@ -14,6 +14,10 @@ namespace RpsGame
           return ThrowChoice.Paper;
         case 's':
           return ThrowChoice.Scissors;
+        case 'l':
+          return ThrowChoice.Lizard;
+        case 'k':
+          return ThrowChoice.Spock;
       }
 
       throw new ArgumentOutOfRangeException(nameof(input));
