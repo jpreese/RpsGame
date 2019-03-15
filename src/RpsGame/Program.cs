@@ -30,9 +30,14 @@ namespace RpsGame
 
       ThrowChoice computerChoice = (ThrowChoice)new Random().Next(1, 4);
 
+      Console.WriteLine(Program.Throw(userChoice, computerChoice));
+    }
+
+    public static string Throw(ThrowChoice userChoice, ThrowChoice computerChoice)
+    {
       if (userChoice == ThrowChoice.Rock)
       {
-        if (computerChoice == ThrowChoice.Rock) { Console.WriteLine("Computer selected rock. Tie.");}
+        if (computerChoice == ThrowChoice.Rock) { Console.WriteLine("Computer selected rock. Tie."); }
         else if (computerChoice == ThrowChoice.Paper) { Console.WriteLine("Computer selected paper. Computer wins."); }
         else if (computerChoice == ThrowChoice.Scissors) { Console.WriteLine("Computer selected scissors. User wins."); }
       }
@@ -48,6 +53,8 @@ namespace RpsGame
         else if (computerChoice == ThrowChoice.Paper) { Console.WriteLine("Computer selected paper. User wins."); }
         else if (computerChoice == ThrowChoice.Scissors) { Console.WriteLine("Computer selected scissors. Tie."); }
       }
+
+      return "Invalid selection. You fail.";
     }
   }
 }
