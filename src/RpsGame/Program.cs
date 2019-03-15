@@ -27,28 +27,21 @@ namespace RpsGame
 
       ThrowChoice computerChoice = (ThrowChoice)new Random().Next(1, 4); // 1 = rock, 2 = paper, 3 = scissors
 
-      Console.WriteLine(ThrowProcessor(input, computerChoice));
+      Outcome outcome = new GameEngine().GenerateOutcome(input, computerChoice);
+
+      Console.WriteLine(ThrowProcessor(input, computerChoice, outcome));
     }
 
-    public static string ThrowProcessor(ThrowChoice userChoice, ThrowChoice computerChoice)
+    public static string ThrowProcessor(ThrowChoice userChoice, ThrowChoice computerChoice, Outcome outcome)
     {
-      if (userChoice == ThrowChoice.Rock)
+      switch (outcome)
       {
-        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. Tie."; }
-        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. Computer wins."; }
-        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. User wins."; }
-      }
-      else if (userChoice == ThrowChoice.Paper)
-      {
-        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. User wins."; }
-        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. Tie."; }
-        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. Computer wins."; }
-      }
-      else if (userChoice == ThrowChoice.Scissors)
-      {
-        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. Computer wins."; }
-        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. User wins."; }
-        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. Tie."; }
+        case Outcome.Tie:
+          return "Computer selected " + computerChoice.ToString().ToLower() + ". Tie.";
+        case Outcome.Player1Wins:
+          return "Computer selected " + computerChoice.ToString().ToLower() + ". User wins.";
+        case Outcome.Player2Wins:
+          return "Computer selected " + computerChoice.ToString().ToLower() + ". Computer wins.";
       }
 
       return "You all failed.";
