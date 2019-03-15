@@ -28,7 +28,23 @@ namespace RpsGame
       
       Console.WriteLine("");
 
-      ThrowChoice computerChoice = (ThrowChoice)new Random().Next(1, 4);
+      int random = new Random().Next(1, 4);
+      
+
+      ThrowChoice computerChoice = ThrowChoice.Rock;
+
+      switch (random)
+      {
+        case 1:
+          computerChoice = ThrowChoice.Rock;
+          break;
+        case 2:
+          computerChoice = ThrowChoice.Paper;
+          break;
+        case 3:
+          computerChoice = ThrowChoice.Scissors;
+          break;
+      }
 
       Console.WriteLine(Program.Throw(userChoice, computerChoice));
     }
@@ -37,21 +53,21 @@ namespace RpsGame
     {
       if (userChoice == ThrowChoice.Rock)
       {
-        if (computerChoice == ThrowChoice.Rock) { Console.WriteLine("Computer selected rock. Tie."); }
-        else if (computerChoice == ThrowChoice.Paper) { Console.WriteLine("Computer selected paper. Computer wins."); }
-        else if (computerChoice == ThrowChoice.Scissors) { Console.WriteLine("Computer selected scissors. User wins."); }
+        if (computerChoice == ThrowChoice.Rock) {return "Computer selected rock. Tie."; }
+        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. Computer wins."; }
+        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. User wins."; }
       }
       else if (userChoice == ThrowChoice.Paper)
       {
-        if (computerChoice == ThrowChoice.Rock) { Console.WriteLine("Computer selected rock. User wins."); }
-        else if (computerChoice == ThrowChoice.Paper) { Console.WriteLine("Computer selected paper. Tie."); }
-        else if (computerChoice == ThrowChoice.Scissors) { Console.WriteLine("Computer selected scissors. Computer wins."); }
+        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. User wins."; }
+        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. Tie."; }
+        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. Computer wins."; }
       }
       else if (userChoice == ThrowChoice.Scissors)
       {
-        if (computerChoice == ThrowChoice.Rock) { Console.WriteLine("Computer selected rock. Computer wins."); }
-        else if (computerChoice == ThrowChoice.Paper) { Console.WriteLine("Computer selected paper. User wins."); }
-        else if (computerChoice == ThrowChoice.Scissors) { Console.WriteLine("Computer selected scissors. Tie."); }
+        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. Computer wins."; }
+        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. User wins."; }
+        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. Tie."; }
       }
 
       return "Invalid selection. You fail.";

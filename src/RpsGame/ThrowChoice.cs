@@ -1,9 +1,55 @@
-﻿namespace RpsGame
+﻿using System.Linq;
+
+namespace RpsGame
 {
-  public enum ThrowChoice
+  public sealed class ThrowChoice
   {
-    Rock = 1,
-    Paper = 2,
-    Scissors = 3
+    public static readonly ThrowChoice Rock;
+    public static readonly ThrowChoice Paper;
+    public static readonly ThrowChoice Scissors;
+
+    private readonly string _name;
+    private readonly ThrowChoice[] _winsAgainst;
+    private readonly ThrowChoice[] _losesAgainst;
+
+    static ThrowChoice()
+    {
+      ThrowChoice[] rockWins = new ThrowChoice[1];
+      ThrowChoice[] rockLoses = new ThrowChoice[1];
+      ThrowChoice.Rock = new ThrowChoice("rock", rockWins, rockLoses);
+
+      ThrowChoice[] paperWins = new ThrowChoice[1];
+      ThrowChoice[] paperLoses = new ThrowChoice[1];
+      ThrowChoice.Paper = new ThrowChoice("paper", paperWins, paperLoses);
+
+      ThrowChoice[] scissorsWins = new ThrowChoice[1];
+      ThrowChoice[] scissorsLoses = new ThrowChoice[1];
+      ThrowChoice.Scissors = new ThrowChoice("scissors", scissorsWins, scissorsLoses);
+
+      rockWins[0] = Scissors;
+      paperWins[0] = Rock;
+      scissorsWins[0] = Paper;
+
+      rockLoses[0] = Paper;
+      paperLoses[0] = Scissors;
+      scissorsLoses[0] = Rock;
+    }
+
+    private ThrowChoice(string name, ThrowChoice[] winsAgainst, ThrowChoice[] losesAgainst)
+    {
+      _name = name;
+      _winsAgainst = winsAgainst;
+      _losesAgainst = losesAgainst;
+    }
+
+    public Outcome ThrowAgainst(ThrowChoice other)
+    {
+      if (this == other)
+      {
+        return Outcome.Tie;
+      }
+
+      return _winsAgainst.Contains(other) ? Outcome.Win : Outcome.Loss;
+    }
   }
 }
