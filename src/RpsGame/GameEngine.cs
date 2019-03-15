@@ -1,9 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace RpsGame
 {
   public sealed class GameEngine
   {
+    private static readonly Dictionary<ThrowChoice, HashSet<ThrowChoice>> WinsAgainst = new Dictionary<ThrowChoice, HashSet<ThrowChoice>>();
+
+    static GameEngine()
+    {
+      WinsAgainst[ThrowChoice.Paper] = new HashSet<ThrowChoice>() { ThrowChoice.Rock };
+      WinsAgainst[ThrowChoice.Rock] = new HashSet<ThrowChoice>(){ ThrowChoice.Scissors};
+      WinsAgainst[ThrowChoice.Scissors] = new HashSet<ThrowChoice>() { ThrowChoice.Paper };
+    }
+
     public Outcome GenerateOutcome(ThrowChoice playerOne, ThrowChoice playerTwo)
     {
       if (playerOne == playerTwo)
@@ -11,29 +21,7 @@ namespace RpsGame
         return Outcome.Tie;
       }
 
-      if (playerOne == ThrowChoice.Rock)
-      {
-        if (playerTwo == ThrowChoice.Paper)
-        {
-          return Outcome.Player2Wins;
-        }
-        else if (playerTwo == ThrowChoice.Scissors)
-        {
-          return Outcome.Player1Wins;
-        }
-      }
-      else if (playerOne == ThrowChoice.Paper)
-      {
-        if (playerTwo == ThrowChoice.Rock) { return Outcome.Player1Wins; }
-        else if (playerTwo == ThrowChoice.Scissors) { return Outcome.Player2Wins; }
-      }
-      else if (playerOne == ThrowChoice.Scissors)
-      {
-        if (playerTwo == ThrowChoice.Rock) { return Outcome.Player2Wins; }
-        else if (playerTwo == ThrowChoice.Paper) { return Outcome.Player1Wins; }
-      }
-
-      throw new Exception("You can't actually get here");
+      return WinsAgainst[playerOne].Contains(playerTwo) ? Outcome.Player1Wins : Outcome.Player2Wins;
     }
   }
 }
