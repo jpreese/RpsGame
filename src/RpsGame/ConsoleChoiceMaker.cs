@@ -10,7 +10,7 @@ namespace RpsGame
       {
         while (true)
         {
-          Console.Write("Pick (r)ock, (p)aper, or (s)cissors: ");
+          Console.Write("Pick (r)ock, (p)aper, (s)cissors, (l)izzard, or Spoc(k): ");
 
           switch (Console.ReadKey().KeyChar)
           {
@@ -23,6 +23,12 @@ namespace RpsGame
             case 's':
             case 'S':
               return ThrowChoice.Scissors;
+            case 'l':
+            case 'L':
+              return ThrowChoice.Lizard;
+            case 'k':
+            case 'K':
+              return ThrowChoice.Spock;
             default:
               Console.WriteLine("Invalid input. Try again.");
               break;

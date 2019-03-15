@@ -31,8 +31,15 @@ namespace RpsGame
       ThrowChoice.Spock = new ThrowChoice("Spock", spockWins);
 
       rockWins[0] = Scissors;
+      rockWins[1] = Lizard;
       paperWins[0] = Rock;
+      paperWins[1] = Spock;
       scissorsWins[0] = Paper;
+      scissorsWins[1] = Lizard;
+      lizardWins[0] = Spock;
+      lizardWins[1] = Paper;
+      spockWins[0] = Rock;
+      spockWins[1] = Scissors;
     }
 
     private ThrowChoice(string name, ThrowChoice[] winsAgainst)

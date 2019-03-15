@@ -7,7 +7,7 @@ namespace RpsGame
     private readonly Random _rand = new Random();
     public ThrowChoice GetChoice()
     {
-      int random = new Random().Next(1, 4);
+      int random = new Random().Next(1, 6);
 
       switch (random)
       {
@@ -16,8 +16,12 @@ namespace RpsGame
         case 2:
           return ThrowChoice.Paper;
         case 3:
-        default:
           return ThrowChoice.Scissors;
+        case 4:
+          return ThrowChoice.Lizard;
+        case 5:
+        default:
+          return ThrowChoice.Spock;
       }
     }
   }
