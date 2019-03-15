@@ -9,9 +9,11 @@ namespace RpsGame
 
     static GameEngine()
     {
-      WinsAgainst[ThrowChoice.Paper] = new HashSet<ThrowChoice>() { ThrowChoice.Rock };
-      WinsAgainst[ThrowChoice.Rock] = new HashSet<ThrowChoice>(){ ThrowChoice.Scissors};
-      WinsAgainst[ThrowChoice.Scissors] = new HashSet<ThrowChoice>() { ThrowChoice.Paper };
+      WinsAgainst[ThrowChoice.Paper] = new HashSet<ThrowChoice>() { ThrowChoice.Rock, ThrowChoice.Spock };
+      WinsAgainst[ThrowChoice.Rock] = new HashSet<ThrowChoice>(){ ThrowChoice.Scissors, ThrowChoice.Lizard};
+      WinsAgainst[ThrowChoice.Scissors] = new HashSet<ThrowChoice>() { ThrowChoice.Paper, ThrowChoice.Lizard  };
+      WinsAgainst[ThrowChoice.Lizard] = new HashSet<ThrowChoice>(){ ThrowChoice.Spock, ThrowChoice.Paper };
+      WinsAgainst[ThrowChoice.Spock] = new HashSet<ThrowChoice>(){ ThrowChoice.Rock, ThrowChoice.Scissors };
     }
 
     public Outcome GenerateOutcome(ThrowChoice playerOne, ThrowChoice playerTwo)
