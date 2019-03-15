@@ -51,26 +51,25 @@ namespace RpsGame
 
     public static string Throw(ThrowChoice userChoice, ThrowChoice computerChoice)
     {
-      if (userChoice == ThrowChoice.Rock)
+      Outcome outcome = userChoice.ThrowAgainst(computerChoice);
+
+      string outcomeLabel;
+
+      switch (outcome)
       {
-        if (computerChoice == ThrowChoice.Rock) {return "Computer selected rock. Tie."; }
-        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. Computer wins."; }
-        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. User wins."; }
-      }
-      else if (userChoice == ThrowChoice.Paper)
-      {
-        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. User wins."; }
-        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. Tie."; }
-        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. Computer wins."; }
-      }
-      else if (userChoice == ThrowChoice.Scissors)
-      {
-        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. Computer wins."; }
-        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. User wins."; }
-        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. Tie."; }
+        case Outcome.Win:
+          outcomeLabel = "User wins.";
+          break;
+        case Outcome.Loss:
+          outcomeLabel = "Computer wins.";
+          break;
+        case Outcome.Tie:
+        default:
+          outcomeLabel = "Tie.";
+          break;
       }
 
-      return "Invalid selection. You fail.";
+      return $"Computer selected {computerChoice.Name}. {outcomeLabel}";
     }
   }
 }

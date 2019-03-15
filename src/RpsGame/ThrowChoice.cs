@@ -8,7 +8,6 @@ namespace RpsGame
     public static readonly ThrowChoice Paper;
     public static readonly ThrowChoice Scissors;
 
-    private readonly string _name;
     private readonly ThrowChoice[] _winsAgainst;
     private readonly ThrowChoice[] _losesAgainst;
 
@@ -37,10 +36,12 @@ namespace RpsGame
 
     private ThrowChoice(string name, ThrowChoice[] winsAgainst, ThrowChoice[] losesAgainst)
     {
-      _name = name;
+      this.Name = name;
       _winsAgainst = winsAgainst;
       _losesAgainst = losesAgainst;
     }
+
+    public string Name { get; }
 
     public Outcome ThrowAgainst(ThrowChoice other)
     {
