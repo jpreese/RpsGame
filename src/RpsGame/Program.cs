@@ -8,45 +8,11 @@ namespace RpsGame
     {
       Console.WriteLine("Rock Paper Scissors");
       Console.WriteLine("-------------------");
-      Console.Write("Pick (r)ock, (p)aper, or (s)cissors: ");
 
-      ThrowChoice userChoice = ThrowChoice.Paper;
+      IChoiceMaker user = new ConsoleChoiceMaker();
+      IChoiceMaker computer = new RandomChoiceMaker();
 
-      switch (Console.ReadKey().KeyChar)
-      {
-        case 'r':
-          userChoice = ThrowChoice.Rock;
-          break;
-        case 'p':
-          userChoice = ThrowChoice.Paper;
-          break;
-        case 's':
-          userChoice = ThrowChoice.Scissors;
-          break;
-      }
-
-      
-      Console.WriteLine("");
-
-      int random = new Random().Next(1, 4);
-      
-
-      ThrowChoice computerChoice = ThrowChoice.Rock;
-
-      switch (random)
-      {
-        case 1:
-          computerChoice = ThrowChoice.Rock;
-          break;
-        case 2:
-          computerChoice = ThrowChoice.Paper;
-          break;
-        case 3:
-          computerChoice = ThrowChoice.Scissors;
-          break;
-      }
-
-      Console.WriteLine(Program.Throw(userChoice, computerChoice));
+      Console.WriteLine(Program.Throw(user.GetChoice(), computer.GetChoice()));
     }
 
     public static string Throw(ThrowChoice userChoice, ThrowChoice computerChoice)
