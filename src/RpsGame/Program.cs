@@ -10,61 +10,45 @@ namespace RpsGame
       Console.WriteLine("-------------------");
       Console.Write("Pick (r)ock, (p)aper, or (s)cissors: ");
 
-      var input = Console.ReadKey().KeyChar;
+      UserChoiceParser parser = new UserChoiceParser();
+
+      ThrowChoice input;
+      try
+      {
+        input = parser.ParseChoice(Console.ReadKey().KeyChar);
+      }
+      catch (ArgumentOutOfRangeException aex)
+      {
+        Console.WriteLine("You all failed.");
+        return;
+      }
 
       Console.WriteLine("");
 
-      int computerChoice = new Random().Next(1, 4); // 1 = rock, 2 = paper, 3 = scissors
+      ThrowChoice computerChoice = (ThrowChoice)new Random().Next(1, 4); // 1 = rock, 2 = paper, 3 = scissors
 
       Console.WriteLine(ThrowProcessor(input, computerChoice));
     }
 
-    public static string ThrowProcessor(char input, int computerChoice)
+    public static string ThrowProcessor(ThrowChoice userChoice, ThrowChoice computerChoice)
     {
-      if (input == 'r')
+      if (userChoice == ThrowChoice.Rock)
       {
-        if (computerChoice == 1)
-        {
-          return "Computer selected rock. Tie.";
-        }
-        else if (computerChoice == 2)
-        {
-          return "Computer selected paper. Computer wins.";
-        }
-        else if (computerChoice == 3)
-        {
-          return "Computer selected scissors. User wins.";
-        }
+        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. Tie."; }
+        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. Computer wins."; }
+        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. User wins."; }
       }
-      else if (input == 'p')
+      else if (userChoice == ThrowChoice.Paper)
       {
-        if (computerChoice == 1)
-        {
-          return "Computer selected rock. User wins.";
-        }
-        else if (computerChoice == 2)
-        {
-          return "Computer selected paper. Tie.";
-        }
-        else if (computerChoice == 3)
-        {
-          return "Computer selected scissors. Computer wins.";
-        }
+        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. User wins."; }
+        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. Tie."; }
+        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. Computer wins."; }
       }
-      else if (input == 's')
+      else if (userChoice == ThrowChoice.Scissors)
       {
-        if (computerChoice == 1)
-        {
-          return "Computer selected rock. Computer wins.";
-        }
-        else if (computerChoice == 2)
-        {
-          return "Computer selected paper. User wins.";
-        }
-        else if (computerChoice == 3)
-        {
-          return "Computer selected scissors. Tie.";
-        }
+        if (computerChoice == ThrowChoice.Rock) { return "Computer selected rock. Computer wins."; }
+        else if (computerChoice == ThrowChoice.Paper) { return "Computer selected paper. User wins."; }
+        else if (computerChoice == ThrowChoice.Scissors) { return "Computer selected scissors. Tie."; }
       }
 
       return "You all failed.";
