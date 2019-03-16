@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RpsGame
 {
@@ -12,57 +10,72 @@ namespace RpsGame
             Console.WriteLine("-------------------");
             Console.Write("Pick (r)ock, (p)aper, or (s)cissors: ");
 
-            var input = Console.ReadKey();
+            var input = GetUserInput();
 
             Console.WriteLine("");
 
-            int computerChoice = new Random().Next(1, 4); // 1 = rock, 2 = paper, 3 = scissors
+            int computerChoice = GetComputerChoice();
 
             if (input.KeyChar == 'r')
             {
                 if (computerChoice == 1)
                 {
-                    Console.WriteLine("Computer selected rock. Tie.");
+                    DisplayResult("Computer selected rock. Tie.");
                 }
                 else if (computerChoice == 2)
                 {
-                    Console.WriteLine("Computer selected paper. Computer wins.");
+                    DisplayResult("Computer selected paper. Computer wins.");
                 }
                 else if (computerChoice == 3)
                 {
-                    Console.WriteLine("Computer selected scissors. User wins.");
+                    DisplayResult("Computer selected scissors. User wins.");
                 }
             }
             else if (input.KeyChar == 'p')
             {
                 if (computerChoice == 1)
                 {
-                    Console.WriteLine("Computer selected rock. User wins.");
+                    DisplayResult("Computer selected rock. User wins.");
                 }
                 else if (computerChoice == 2)
                 {
-                    Console.WriteLine("Computer selected paper. Tie.");
+                    DisplayResult("Computer selected paper. Tie.");
                 }
                 else if (computerChoice == 3)
                 {
-                    Console.WriteLine("Computer selected scissors. Computer wins.");
+                    DisplayResult("Computer selected scissors. Computer wins.");
                 }
             }
             else if (input.KeyChar == 's')
             {
                 if (computerChoice == 1)
                 {
-                    Console.WriteLine("Computer selected rock. Computer wins.");
+                    DisplayResult("Computer selected rock. Computer wins.");
                 }
                 else if (computerChoice == 2)
                 {
-                    Console.WriteLine("Computer selected paper. User wins.");
+                    DisplayResult("Computer selected paper. User wins.");
                 }
                 else if (computerChoice == 3)
                 {
-                    Console.WriteLine("Computer selected scissors. Tie.");
+                    DisplayResult("Computer selected scissors. Tie.");
                 }
             }
+        }
+
+        protected virtual void DisplayResult(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        protected virtual ConsoleKeyInfo GetUserInput()
+        {
+            return Console.ReadKey();
+        }
+
+        protected virtual int GetComputerChoice()
+        {
+            return new Random().Next(1, 4);
         }
     }
 }
